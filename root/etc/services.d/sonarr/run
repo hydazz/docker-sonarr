@@ -7,4 +7,4 @@ cd /app/sonarr/bin || exit
 
 exec \
   s6-setuidgid abc mono --debug Sonarr.exe \
-  -nobrowser -data=/config
+  -nobrowser -data=/config >/dev/null
