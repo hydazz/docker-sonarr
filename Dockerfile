@@ -7,7 +7,7 @@ LABEL build_version="Split of Linuxserver.io version: ${VERSION} Build-date: ${B
 LABEL maintainer="hydazz"
 
 # environment settings
-ENV SONARR_BRANCH
+ARG SONARR_BRANCH
 ARG SONARR_VERSION
 ENV XDG_CONFIG_HOME="/config/xdg"
 
