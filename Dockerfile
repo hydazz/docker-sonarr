@@ -12,13 +12,6 @@ ARG SONARR_VERSION
 ENV XDG_CONFIG_HOME="/config/xdg"
 
 RUN \
- echo "**** install packages ****" && \
- apk add --no-cache \
-  curl \
-  icu-libs \
-  libintl \
-	libmediainfo \
-  sqlite-libs && \
  echo "**** install sonarr ****" && \
  mkdir -p /app/sonarr/bin && \
  curl -o \
