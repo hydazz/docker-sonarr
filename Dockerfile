@@ -14,6 +14,7 @@ ENV XDG_CONFIG_HOME="/config/xdg"
 RUN \
  echo "**** install sonarr ****" && \
  mkdir -p /app/sonarr/bin && \
+ echo "downloading https://download.sonarr.tv/v3/${SONARR_BRANCH}/${SONARR_VERSION}/Sonarr.${SONARR_BRANCH}.${SONARR_VERSION}.linux.tar.gz"
  curl -o \
 	/tmp/sonarr.tar.gz -L \
 	"https://download.sonarr.tv/v3/${SONARR_BRANCH}/${SONARR_VERSION}/Sonarr.${SONARR_BRANCH}.${SONARR_VERSION}.linux.tar.gz" && \
