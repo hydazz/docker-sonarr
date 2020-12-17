@@ -55,8 +55,8 @@ jobs:
       env:
         VERSION: ${{ steps.variables.outputs.VERSION }}
         DOCKERHUB_IMAGE: ${{ steps.variables.outputs.DOCKERHUB_IMAGE }}
-        SONARR_BRANCH: ${{ steps.variables.sonarr.SONARR_BRANCH }}
-        SONARR_VERSION: ${{ steps.variables.sonarr.SONARR_VERSION }}
+        SONARR_BRANCH: ${{ steps.sonarr.outputs.SONARR_BRANCH }}
+        SONARR_VERSION: ${{ steps.sonarr.outputs.SONARR_VERSION }}
       run: |
         docker build --no-cache --pull . --file Dockerfile --build-arg SONARR_BRANCH="$SONARR_BRANCH" --build-arg SONARR_VERSION="$SONARR_VERSION" --build-arg VERSION="$VERSION" --build-arg BUILD_DATE="$(date +%Y-%m-%d)" --tag "$DOCKERHUB_IMAGE":cibuild
 
