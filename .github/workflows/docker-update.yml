@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Set Enviroment Variables
       id: variables
       env:
@@ -36,15 +36,15 @@ jobs:
         VERSION="$(curl --silent "https://api.github.com/repos/linuxserver/$GIT_REPO/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')"
         echo "::set-output name=VERSION::$VERSION"
 
-    - name: Set Radarr Variables
+    - name: Set sonarr Variables
       id: sonarr
       env:
-        RADARR_BRANCH: nightly
+        SONARR_BRANCH: phantom-develop
       run: |
-        RADARR_RELEASE="$(curl -sL "https://radarr.servarr.com/v1/update/$RADARR_BRANCH/changes?os=linuxmusl" | jq -r '.[0].version')"
-        echo "::set-output name=RADARR_RELEASE::$RADARR_RELEASE"
-        echo "::set-output name=RADARR_BRANCH::$RADARR_BRANCH"
-        
+        SONARR_VERSION="$(curl -sX GET https://services.sonarr.tv/v1/download/${SONARR_BRANCH}?version=3 | jq -r '.version')"
+        echo "::set-output name=SONARR_VERSION::$SONARR_VERSION"
+        echo "::set-output name=SONARR_BRANCH::$SONARR_BRANCH"
+
     - name: Docker Login
       env:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
@@ -55,10 +55,10 @@ jobs:
       env:
         VERSION: ${{ steps.variables.outputs.VERSION }}
         DOCKERHUB_IMAGE: ${{ steps.variables.outputs.DOCKERHUB_IMAGE }}
-        RADARR_BRANCH: ${{ steps.variables.radarr.RADARR_BRANCH }}
-        RADARR_RELEASE: ${{ steps.variables.radarr.RADARR_RELEASE }}
+        SONARR_BRANCH: ${{ steps.variables.sonarr.SONARR_BRANCH }}
+        SONARR_VERSION: ${{ steps.variables.sonarr.SONARR_VERSION }}
       run: |
-        docker build --no-cache --pull . --file Dockerfile --build-arg RADARR_BRANCH="$RADARR_BRANCH" --build-arg RADARR_RELEASE="$RADARR_RELEASE" --build-arg VERSION="$VERSION" --build-arg BUILD_DATE="$(date +%Y-%m-%d)" --tag "$DOCKERHUB_IMAGE":cibuild
+        docker build --no-cache --pull . --file Dockerfile --build-arg SONARR_BRANCH="$SONARR_BRANCH" --build-arg SONARR_VERSION="$SONARR_VERSION" --build-arg VERSION="$VERSION" --build-arg BUILD_DATE="$(date +%Y-%m-%d)" --tag "$DOCKERHUB_IMAGE":cibuild
 
     - name: Compare package_versions.txt
       id: packages

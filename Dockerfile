@@ -1,28 +1,26 @@
-FROM ghcr.io/linuxserver/baseimage-mono:LTS
+FROM vcxpz/baseimage-mono:alpine
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-ARG SONARR_VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sparklyballs"
+LABEL build_version="Split of Linuxserver.io version: ${VERSION} Build-date: ${BUILD_DATE}"
+LABEL maintainer="hydazz"
 
-# set environment variables
-ARG DEBIAN_FRONTEND="noninteractive"
+# environment settings
+ENV SONARR_BRANCH
+ARG SONARR_VERSION
 ENV XDG_CONFIG_HOME="/config/xdg"
-ENV SONARR_BRANCH="phantom-develop"
 
 RUN \
  echo "**** install packages ****" && \
- apt-get update && \
- apt-get install -y \
-        jq && \
+ apk add --no-cache \
+  curl \
+  icu-libs \
+  libintl \
+	libmediainfo \
+  sqlite-libs && \
  echo "**** install sonarr ****" && \
  mkdir -p /app/sonarr/bin && \
-  if [ -z ${SONARR_VERSION+x} ]; then \
-	SONARR_VERSION=$(curl -sX GET https://services.sonarr.tv/v1/download/${SONARR_BRANCH}?version=3 \
-	| jq -r '.version'); \
- fi && \
  curl -o \
 	/tmp/sonarr.tar.gz -L \
 	"https://download.sonarr.tv/v3/${SONARR_BRANCH}/${SONARR_VERSION}/Sonarr.${SONARR_BRANCH}.${SONARR_VERSION}.linux.tar.gz" && \
@@ -30,12 +28,10 @@ RUN \
 	/tmp/sonarr.tar.gz -C \
 	/app/sonarr/bin --strip-components=1 && \
  echo "UpdateMethod=docker\nBranch=${SONARR_BRANCH}\nPackageVersion=${VERSION}\nPackageAuthor=linuxserver.io" > /app/sonarr/package_info && \
- rm -rf /app/sonarr/bin/Sonarr.Update && \
  echo "**** cleanup ****" && \
- apt-get clean && \
  rm -rf \
-	/tmp/* \
-	/var/tmp/*
+  /app/sonarr/bin/Sonarr.Update \
+  /tmp/*
 
 # add local files
 COPY root/ /
