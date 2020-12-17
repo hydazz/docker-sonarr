@@ -5,4 +5,6 @@ umask "$UMASK_SET"
 
 cd /app/sonarr/bin || exit
 
-exec s6-setuidgid abc mono Sonarr.exe -nobrowser -data=/config
+exec \
+  s6-setuidgid abc mono --debug Sonarr.exe \
+  -nobrowser -data=/config
