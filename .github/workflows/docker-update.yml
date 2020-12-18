@@ -2,7 +2,7 @@ name: Docker Update CI
 
 on:
   schedule:
-    - cron:  '10 0 * * 0'
+    - cron:  '10 0 * * *'
   workflow_dispatch:
   push:
     branches:
