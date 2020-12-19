@@ -116,7 +116,7 @@ jobs:
         repository: ${{ steps.variables.outputs.DOCKERHUB_IMAGE }}
 
     - name: Tag And Push Docker Image
-      if: steps.packages.outputs.OLD_SONARR_VERSION == steps.variables.outputs.SONARR_VERSION
+      if: steps.packages.outputs.OLD_SONARR_VERSION != steps.variables.outputs.SONARR_VERSION
       env:
         DOCKERHUB_IMAGE: ${{ steps.variables.outputs.DOCKERHUB_IMAGE }}
         DOCKERIMAGE_TAG: ${{ steps.variables.outputs.DOCKERIMAGE_TAG }}
