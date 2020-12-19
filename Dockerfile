@@ -1,10 +1,10 @@
-FROM vcxpz/baseimage-mono:alpine
+FROM vcxpz/baseimage-mono
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
-LABEL build_version="Split of Linuxserver.io version: ${VERSION} Build-date: ${BUILD_DATE}"
-LABEL maintainer="hydazz"
+LABEL build_version="Fork of Linuxserver.io version:- ${VERSION} Build date:- ${BUILD_DATE}"
+LABEL maintainer="hydaz"
 
 # environment settings
 ARG SONARR_BRANCH
