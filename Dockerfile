@@ -4,7 +4,7 @@ FROM vcxpz/baseimage-mono
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Fork of Linuxserver.io version:- ${VERSION} Build date:- ${BUILD_DATE}"
-LABEL maintainer="hydaz"
+LABEL maintainer="Alex Hyde"
 
 # environment settings
 ARG SONARR_BRANCH
