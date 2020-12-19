@@ -60,6 +60,7 @@ jobs:
         docker run --rm --entrypoint '/bin/sh' -v "$PWD":/tmp "$DOCKERHUB_IMAGE":cibuild -c '\
           apk info -v | sort >/tmp/package_versions.txt'
         echo "::set-output name=NEW_MD5::$(md5sum package_versions.txt | awk '{ print $1 }')"
+        echo "::set-output name=OLD_SONARR_VERSION::$(cat version_info.json | jq -r .sonarr_version)"
 
     - name: Update README.md
       id: readme
@@ -115,7 +116,7 @@ jobs:
         repository: ${{ steps.variables.outputs.DOCKERHUB_IMAGE }}
 
     - name: Tag And Push Docker Image
-      if: steps.push_packageversions.outputs.COMMIT == 1
+      if: steps.packages.outputs.OLD_SONARR_VERSION == steps.variables.outputs.SONARR_VERSION
       env:
         DOCKERHUB_IMAGE: ${{ steps.variables.outputs.DOCKERHUB_IMAGE }}
         DOCKERIMAGE_TAG: ${{ steps.variables.outputs.DOCKERIMAGE_TAG }}
