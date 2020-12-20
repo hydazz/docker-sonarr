@@ -20,7 +20,7 @@ RUN \
  tar xzf \
 	/tmp/sonarr.tar.gz -C \
 	/app/sonarr/bin --strip-components=1 && \
- printf "UpdateMethod=docker\nBranch=${SONARR_BRANCH}\nPackageVersion=${VERSION}\nPackageAuthor=linuxserver.io" > /app/sonarr/package_info && \
+ printf "UpdateMethod=docker\nBranch=${SONARR_BRANCH}\n" > /app/sonarr/package_info && \
  echo "**** cleanup ****" && \
  rm -rf \
   /app/sonarr/bin/Sonarr.Update \
