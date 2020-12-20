@@ -81,6 +81,7 @@ jobs:
         OLD_SONARR_VERSION=$(cat version_info.json | jq -r .sonarr_version)
         sed -i \
           -e "s/${OLD_OVERLAY_VERSION}/${OVERLAY_VERSION}/g" \
+          -e "s/${OLD_MONO_VERSION}/${MONO_VERSION}/g" \
           -e "s/${OLD_SONARR_VERSION}/${SONARR_VERSION}/g" \
           README.md
         printf '{\n"overlay_version": "'${OVERLAY_VERSION}'",\n"mono_version": "'${MONO_VERSION}'",\n"sonarr_version": "'${SONARR_VERSION}'"\n}\n' >version_info.json
