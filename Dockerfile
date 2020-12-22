@@ -15,6 +15,8 @@ RUN \
    echo "**** install build packages ****" && \
    apk add --no-cache --virtual=build-dependencies \
       curl && \
+   echo "**** install runtime packages ****" && \
+      xmlstarlet && \
    echo "**** install sonarr ****" && \
    mkdir -p /app/sonarr/bin && \
    curl -o \
