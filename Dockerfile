@@ -27,12 +27,17 @@ RUN \
    echo "**** cleanup ****" && \
    apk del --purge \
       build-dependencies && \
+   find /app/sonarr/bin/ -name '*.mdb' -delete && \
    rm -rf \
       /app/sonarr/bin/Sonarr.Update \
       /tmp/*
 
 # add local files
 COPY root/ /
+
+HEALTHCHECK --start-period=10s --timeout=5s \
+   CMD wget -qO /dev/null 'http://localhost:8989/api/system/status' \
+      --header "x-api-key: $(xmlstarlet sel -t -v '/Config/ApiKey' /config/config.xml)"
 
 # ports and volumes
 EXPOSE 8989
