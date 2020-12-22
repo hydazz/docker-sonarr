@@ -22,5 +22,8 @@ docker run -d \
   vcxpz/sonarr
 ```
 
+## Credits
+* [spritsail/sonarr](https://github.com/spritsail/sonarr) for the `HEALTHCHECK` command
+
 ## Todo
 * Nothing, everything works 🙂
