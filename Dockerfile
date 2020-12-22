@@ -16,6 +16,7 @@ RUN \
    apk add --no-cache --virtual=build-dependencies \
       curl && \
    echo "**** install runtime packages ****" && \
+   apk add --no-cache \
       xmlstarlet && \
    echo "**** install sonarr ****" && \
    mkdir -p /app/sonarr/bin && \
@@ -37,6 +38,7 @@ RUN \
 # add local files
 COPY root/ /
 
+# sonarr healthcheck
 HEALTHCHECK --start-period=10s --timeout=5s \
    CMD wget -qO /dev/null 'http://localhost:8989/api/system/status' \
       --header "x-api-key: $(xmlstarlet sel -t -v '/Config/ApiKey' /config/config.xml)"
