@@ -32,7 +32,6 @@ jobs:
         echo "::set-output name=GIT_BRANCH::$GIT_BRANCH"
         echo "::set-output name=DOCKERHUB_IMAGE::$DOCKERHUB_IMAGE"
         echo "::set-output name=DOCKERIMAGE_TAG::$DOCKERIMAGE_TAG"
-        echo "::set-output name=VERSION::$(curl -sX GET "https://api.github.com/repos/linuxserver/$GIT_REPO/releases/latest" | jq -r .tag_name)"
         echo "::set-output name=SONARR_VERSION::$(curl -sX GET https://services.sonarr.tv/v1/download/${SONARR_BRANCH}?version=3 | jq -r '.version')"
         echo "::set-output name=SONARR_BRANCH::$SONARR_BRANCH"
 
@@ -51,12 +50,11 @@ jobs:
 
     - name: Build The Docker Image
       env:
-        VERSION: ${{ steps.variables.outputs.VERSION }}
         DOCKERHUB_IMAGE: ${{ steps.variables.outputs.DOCKERHUB_IMAGE }}
         SONARR_VERSION: ${{ steps.variables.outputs.SONARR_VERSION }}
         SONARR_BRANCH: ${{ steps.variables.outputs.SONARR_BRANCH }}
       run: |
-        docker build --no-cache --pull . --file Dockerfile --build-arg SONARR_BRANCH="$SONARR_BRANCH" --build-arg SONARR_VERSION="$SONARR_VERSION" --build-arg VERSION="$VERSION" --build-arg BUILD_DATE="$(date +%Y-%m-%d)" --tag "$DOCKERHUB_IMAGE":cibuild
+        docker build --no-cache --pull . --file Dockerfile --build-arg SONARR_BRANCH="$SONARR_BRANCH" --build-arg SONARR_VERSION="$SONARR_VERSION" --build-arg BUILD_DATE="$(date +%Y-%m-%d)" --tag "$DOCKERHUB_IMAGE":cibuild
 
     - name: Get New Package Versions From Image
       id: packages

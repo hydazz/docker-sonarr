@@ -2,13 +2,12 @@ FROM vcxpz/baseimage-mono
 
 # set version label
 ARG BUILD_DATE
-ARG VERSION
-LABEL build_version="Fork of Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+ARG SONARR_VERSION
+LABEL build_version="Sonarr version:- ${SONARR_VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="Alex Hyde"
 
 # environment settings
 ARG SONARR_BRANCH
-ARG SONARR_VERSION
 ENV XDG_CONFIG_HOME="/config/xdg"
 
 RUN \
