@@ -12,19 +12,19 @@ ARG SONARR_VERSION
 ENV XDG_CONFIG_HOME="/config/xdg"
 
 RUN \
- echo "**** install sonarr ****" && \
- mkdir -p /app/sonarr/bin && \
- curl -o \
-	/tmp/sonarr.tar.gz -L \
-	"https://download.sonarr.tv/v3/${SONARR_BRANCH}/${SONARR_VERSION}/Sonarr.${SONARR_BRANCH}.${SONARR_VERSION}.linux.tar.gz" && \
- tar xzf \
-	/tmp/sonarr.tar.gz -C \
-	/app/sonarr/bin --strip-components=1 && \
- printf "UpdateMethod=docker\nBranch=${SONARR_BRANCH}\n" > /app/sonarr/package_info && \
- echo "**** cleanup ****" && \
- rm -rf \
-	/app/sonarr/bin/Sonarr.Update \
-	/tmp/*
+   echo "**** install sonarr ****" && \
+   mkdir -p /app/sonarr/bin && \
+   curl -o \
+   /tmp/sonarr.tar.gz -L \
+      "https://download.sonarr.tv/v3/${SONARR_BRANCH}/${SONARR_VERSION}/Sonarr.${SONARR_BRANCH}.${SONARR_VERSION}.linux.tar.gz" && \
+   tar xzf \
+   /tmp/sonarr.tar.gz -C \
+      /app/sonarr/bin --strip-components=1 && \
+   printf "UpdateMethod=docker\nBranch=${SONARR_BRANCH}\n" > /app/sonarr/package_info && \
+   echo "**** cleanup ****" && \
+   rm -rf \
+      /app/sonarr/bin/Sonarr.Update \
+      /tmp/*
 
 # add local files
 COPY root/ /
