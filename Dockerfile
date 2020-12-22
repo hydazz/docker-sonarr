@@ -12,6 +12,9 @@ ARG SONARR_VERSION
 ENV XDG_CONFIG_HOME="/config/xdg"
 
 RUN \
+   echo "**** install build packages ****" && \
+   apk add --no-cache --virtual=build-dependencies \
+      curl && \
    echo "**** install sonarr ****" && \
    mkdir -p /app/sonarr/bin && \
    curl -o \
@@ -22,6 +25,8 @@ RUN \
       /app/sonarr/bin --strip-components=1 && \
    printf "UpdateMethod=docker\nBranch=${SONARR_BRANCH}\n" > /app/sonarr/package_info && \
    echo "**** cleanup ****" && \
+   apk del --purge \
+      build-dependencies && \
    rm -rf \
       /app/sonarr/bin/Sonarr.Update \
       /tmp/*
