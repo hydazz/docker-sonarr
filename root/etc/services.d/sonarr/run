@@ -15,4 +15,4 @@ cd /app/sonarr/bin || exit
 
 redirect_cmd exec \
   s6-setuidgid abc mono --debug Sonarr.exe \
-  -nobrowser -data=/config >/dev/null
+  -nobrowser -data=/config
