@@ -14,6 +14,7 @@ docker run -d \
   -e PGID=1000 \
   -e TZ=Australia/Melbourne \
   -e UMASK_SET=022 `#optional` \
+  -e DEBUG=true/false `#optional` \
   -p 8989:8989 \
   -v <path to appdata>:/config \
   -v <path to tv>:/tv \
@@ -24,6 +25,7 @@ docker run -d \
 
 ## Credits
 * [spritsail/sonarr](https://github.com/spritsail/sonarr) for the `HEALTHCHECK` command
+* [hotio](https://github.com/hotio) for the `redirect_cmd` function
 
 ## Todo
 * Nothing, everything works 🙂

@@ -3,8 +3,16 @@
 UMASK_SET=${UMASK_SET:-022}
 umask "$UMASK_SET"
 
+redirect_cmd() {
+  if [[ "${DEBUG}" == "true" ]]; then
+    "$@"
+  else
+    "$@" >/dev/null 2>&1
+  fi
+}
+
 cd /app/sonarr/bin || exit
 
-exec \
+redirect_cmd exec \
   s6-setuidgid abc mono --debug Sonarr.exe \
   -nobrowser -data=/config >/dev/null
