@@ -15,7 +15,7 @@ libcrypto1.1-1.1.1i-r0
 libcurl-7.74.0-r0
 libgcc-10.2.1_pre1-r1
 libgcrypt-1.8.7-r0
-libgpg-error-1.39-r0
+libgpg-error-1.41-r0
 libintl-0.20.2-r0
 libmediainfo-20.09-r0
 libproc-3.3.16-r0
