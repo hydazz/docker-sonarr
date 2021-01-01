@@ -22,6 +22,7 @@ docker run -d \
   --restart unless-stopped \
   vcxpz/sonarr
 ```
+On Unraid? There's a [template](https://github.com/hydazz/docker-templates/blob/main/hydaz/sonarr.xml)
 
 ## Credits
 * [spritsail/sonarr](https://github.com/spritsail/sonarr) for the `HEALTHCHECK` command
