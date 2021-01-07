@@ -4,7 +4,7 @@ FROM vcxpz/baseimage-mono
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Sonarr version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="Alex Hyde"
+LABEL maintainer="hydaz"
 
 # environment settings
 ARG SONARR_BRANCH
