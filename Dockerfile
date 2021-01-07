@@ -2,8 +2,8 @@ FROM vcxpz/baseimage-mono
 
 # set version label
 ARG BUILD_DATE
-ARG SONARR_VERSION
-LABEL build_version="Sonarr version:- ${SONARR_VERSION} Build-date:- ${BUILD_DATE}"
+ARG VERSION
+LABEL build_version="Sonarr version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="Alex Hyde"
 
 # environment settings
@@ -21,7 +21,7 @@ RUN \
    mkdir -p /app/sonarr/bin && \
    curl -o \
       /tmp/sonarr.tar.gz -L \
-      "https://download.sonarr.tv/v3/${SONARR_BRANCH}/${SONARR_VERSION}/Sonarr.${SONARR_BRANCH}.${SONARR_VERSION}.linux.tar.gz" && \
+      "https://download.sonarr.tv/v3/${SONARR_BRANCH}/${VERSION}/Sonarr.${SONARR_BRANCH}.${VERSION}.linux.tar.gz" && \
    tar xzf \
       /tmp/sonarr.tar.gz -C \
       /app/sonarr/bin --strip-components=1 && \
