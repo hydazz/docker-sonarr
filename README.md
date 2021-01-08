@@ -28,11 +28,17 @@ docker run -d \
 ```
 On Unraid? There's a [template](https://github.com/hydazz/docker-templates/blob/main/hydaz/sonarr.xml)
 
+## New Environment Variables
+### Debug
+| Name | Description | Default Value |
+|-|-|-|
+| `DEBUG` | set `true` to display errors in the Docker logs. When set to `false` the Docker log is completely muted. | `false` |
+
+**See other variables on the official [README](https://github.com/linuxserver/docker-sonarr/)**
+
 ## Upgrading Sonarr
 To upgrade, all you have to do is pull our latest Docker image. We automatically check for Sonarr updates daily so there may be some delay when an update is released to when the image is updated.
 
 ## Credits
 * [spritsail/sonarr](https://github.com/spritsail/sonarr) for the `HEALTHCHECK` command
 * [hotio](https://github.com/hotio) for the `redirect_cmd` function
-
-**Read the official [README](https://github.com/linuxserver/docker-sonarr/) for more information**
