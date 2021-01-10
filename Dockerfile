@@ -10,7 +10,7 @@ LABEL maintainer="hydaz"
 ARG SONARR_BRANCH
 ENV XDG_CONFIG_HOME="/config/xdg"
 
-RUN set -x && \
+RUN set -xe && \
    echo "**** install build packages ****" && \
    apk add --no-cache --virtual=build-dependencies \
       curl && \
