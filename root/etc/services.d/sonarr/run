@@ -13,6 +13,7 @@ redirect_cmd() {
 
 cd /app/sonarr/bin || exit
 
+echo "Starting Sonarr."
 redirect_cmd exec s6-setuidgid abc \
 	mono --debug Sonarr.exe \
 	-nobrowser \
