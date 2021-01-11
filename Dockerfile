@@ -17,7 +17,6 @@ RUN set -xe && \
    echo "**** install runtime packages ****" && \
    apk add --no-cache --upgrade \
       libmediainfo \
-      sqlite-libs \
       xmlstarlet && \
    echo "**** install sonarr ****" && \
    mkdir -p /app/sonarr/bin && \
