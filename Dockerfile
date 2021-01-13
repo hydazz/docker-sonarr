@@ -2,8 +2,8 @@ FROM vcxpz/baseimage-alpine-mono
 
 # set version label
 ARG BUILD_DATE
-ARG VERSION
-LABEL build_version="Sonarr version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+ARG SONARR_RELEASE
+LABEL build_version="Sonarr version:- ${SONARR_RELEASE} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
 
 # environment settings
@@ -22,7 +22,7 @@ RUN set -xe && \
    mkdir -p /app/sonarr/bin && \
    curl -o \
       /tmp/sonarr.tar.gz -L \
-      "https://download.sonarr.tv/v3/${SONARR_BRANCH}/${VERSION}/Sonarr.${SONARR_BRANCH}.${VERSION}.linux.tar.gz" && \
+      "https://download.sonarr.tv/v3/${SONARR_BRANCH}/${SONARR_RELEASE}/Sonarr.${SONARR_BRANCH}.${SONARR_RELEASE}.linux.tar.gz" && \
    tar xzf \
       /tmp/sonarr.tar.gz -C \
       /app/sonarr/bin --strip-components=1 && \

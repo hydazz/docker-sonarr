@@ -13,7 +13,7 @@ sed -i \
 	-e "s/${OLD_SONARR_RELEASE}/${SONARR_RELEASE}/g" \
 	README.md
 
-NEW_VERSION_INFO="overlay_version|mono_version|sonarr_version
+NEW_VERSION_INFO="overlay_version|mono_version|sonarr_release
 ${OVERLAY_VERSION}|${MONO_VERSION}|${SONARR_RELEASE}"
 
 jq -Rn '
