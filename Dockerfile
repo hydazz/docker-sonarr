@@ -20,7 +20,7 @@ RUN set -xe && \
       xmlstarlet && \
    echo "**** install sonarr ****" && \
    mkdir -p /app/sonarr/bin && \
-   curl -o \
+   curl --silent -o \
       /tmp/sonarr.tar.gz -L \
       "https://download.sonarr.tv/v3/${SONARR_BRANCH}/${SONARR_RELEASE}/Sonarr.${SONARR_BRANCH}.${SONARR_RELEASE}.linux.tar.gz" && \
    tar xzf \
