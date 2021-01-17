@@ -84,7 +84,7 @@ jobs:
 
       - name: Commit And Push Changes To Github
         env:
-          TOKEN: ${{ secrents.TOKEN }}
+          TOKEN: ${{ secrets.TOKEN }}
         run: |
           git add -A
           git commit -m "Bot Updating Files" || echo "No Changes"
