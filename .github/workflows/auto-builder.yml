@@ -34,7 +34,7 @@ jobs:
           DOCKERHUB_IMAGE: sonarr
           DOCKERIMAGE_TAG: latest
           SONARR_BRANCH: phantom-develop
-          PLATFORMS: linux/amd64,linux/arm64
+          PLATFORMS: linux/amd64
         run: |
           echo "DOCKERHUB_IMAGE=${DOCKERHUB_IMAGE}" >>$GITHUB_ENV
           echo "DOCKERHUB_USER=${DOCKERHUB_USER}" >>$GITHUB_ENV
@@ -61,16 +61,11 @@ jobs:
         run: |
           docker build \
             --platform=${PLATFORMS} \
-            --output "type=image,push=true" \
+            --output "type=image,push=false" \
             --build-arg VERSION=${SONARR_RELEASE} \
             --build-arg BRANCH="${SONARR_BRANCH}" \
             --tag ${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}:${DOCKERIMAGE_TAG} \
             --file Dockerfile .
-
-      - name: Get New Package Versions From Image
-        run: |
-          docker run --rm --entrypoint '/bin/sh' -v "$PWD":/tmp ${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}:${DOCKERIMAGE_TAG} -c '\
-            apk info -v | sort >/tmp/package_versions.txt'
 
       - name: Update README
         env:
