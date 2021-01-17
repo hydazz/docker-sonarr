@@ -78,6 +78,10 @@ jobs:
         run: |
           chmod +x update_version_info.sh && ./update_version_info.sh
 
+      - name: Update This File
+        run: |
+          curl -sSL https://raw.githubusercontent.com/hydazz/ci-scripts/main/scripts/auto-builder.sh | bash
+
       - name: Commit And Push Changes To Github
         run: |
           git add -A
