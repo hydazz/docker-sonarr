@@ -62,10 +62,10 @@ jobs:
           docker build \
             --platform=${PLATFORMS} \
             --output "type=image,push=true" \
-            --build-arg SONARR_RELEASE=${SONARR_RELEASE} \
-            --build-arg SONARR_BRANCH="${SONARR_BRANCH}" \
+            --build-arg VERSION=${SONARR_RELEASE} \
+            --build-arg BRANCH="${SONARR_BRANCH}" \
             --tag ${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}:${DOCKERIMAGE_TAG} \
-            --tag ${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}:${SONARR_RELEASE} \
+            --tag ${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}:${VERSION} \
             --file Dockerfile .
 
       - name: Get New Package Versions From Image
