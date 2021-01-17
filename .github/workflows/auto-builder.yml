@@ -3,7 +3,7 @@ name: Auto Builder CI
 on:
   workflow_dispatch:
   schedule:
-    - cron: "10 0 * * 0" # L3 image
+    - cron: "10 0 * * 0"
   release:
     types:
       - released
@@ -27,23 +27,6 @@ jobs:
         with:
           install: true
 
-      - name: Set Enviroment Variables
-        id: variables
-        env:
-          DOCKERHUB_USER: vcxpz
-          DOCKERHUB_IMAGE: sonarr
-          DOCKERIMAGE_TAG: latest
-          SONARR_BRANCH: phantom-develop
-          PLATFORMS: linux/amd64
-        run: |
-          echo "DOCKERHUB_IMAGE=${DOCKERHUB_IMAGE}" >>$GITHUB_ENV
-          echo "DOCKERHUB_USER=${DOCKERHUB_USER}" >>$GITHUB_ENV
-          echo "DOCKERIMAGE_TAG=${DOCKERIMAGE_TAG}" >>$GITHUB_ENV
-          echo "::set-output name=SONARR_RELEASE::$(curl -sX GET "https://api.github.com/repos/hydazz/docker-${DOCKERHUB_IMAGE}/releases/latest" | jq -r .tag_name)"
-          echo "::set-output name=USER_IMAGE::${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}"
-          echo "SONARR_BRANCH=${SONARR_BRANCH}" >>$GITHUB_ENV
-          echo "PLATFORMS=${PLATFORMS}" >>$GITHUB_ENV
-
       - name: Docker Login
         uses: docker/login-action@v1
         with:
@@ -55,30 +38,31 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
 
-      - name: Update README
-        env:
-          SONARR_RELEASE: ${{ steps.variables.outputs.SONARR_RELEASE }}
+      - name: Build And Push The Docker Image
         run: |
-          chmod +x update_version_info.sh && ./update_version_info.sh
+          docker build \
+            --platform=linux/amd64,linux/arm64 \
+            --output "type=image,push=true" \
+            --build-arg VERSION=$(curl -sX GET "https://api.github.com/repos/hydazz/docker-sonarr/releases/latest" | jq -r .tag_name) \
+            --build-arg BRANCH="phantom-develop" \
+            --tag vcxpz/sonarr:latest \
+            --tag vcxpz/sonarr:$(curl -sX GET "https://api.github.com/repos/hydazz/docker-sonarr/releases/latest" | jq -r .tag_name) \
+            --file Dockerfile .
 
-      - name: Update This File
+      - name: Update README
         run: |
-          curl -sSL https://raw.githubusercontent.com/hydazz/ci-templates/main/scripts/auto-builder.sh | bash
+          export APP_VERSION=$(curl -sX GET "https://api.github.com/repos/hydazz/docker-sonarr/releases/latest" | jq -r .tag_name)
+          chmod +x update_version_info.sh && ./update_version_info.sh
 
       - name: Commit Changes
         run: |
           git add -A
           git commit -m "Bot Updating Files" || echo "No Changes"
-
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          branch: main
+          git push || echo "No Changes"
 
       - name: Sync README With Docker Hub
         uses: peter-evans/dockerhub-description@v2
         with:
           username: vcxpz
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: ${{ steps.variables.outputs.USER_IMAGE }}
+          repository: vcxpz/sonarr
