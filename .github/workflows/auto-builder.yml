@@ -65,7 +65,6 @@ jobs:
             --build-arg VERSION=${SONARR_RELEASE} \
             --build-arg BRANCH="${SONARR_BRANCH}" \
             --tag ${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}:${DOCKERIMAGE_TAG} \
-            --tag ${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}:${VERSION} \
             --file Dockerfile .
 
       - name: Get New Package Versions From Image
