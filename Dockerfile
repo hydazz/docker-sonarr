@@ -2,12 +2,12 @@ FROM vcxpz/baseimage-alpine-mono:latest
 
 # set version label
 ARG BUILD_DATE
-ARG SONARR_RELEASE
-LABEL build_version="Sonarr version:- ${SONARR_RELEASE} Build-date:- ${BUILD_DATE}"
+ARG VERSION
+LABEL build_version="Sonarr version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
 
 # environment settings
-ARG SONARR_BRANCH
+ARG BRANCH
 ENV XDG_CONFIG_HOME="/config/xdg"
 
 RUN set -xe && \
@@ -22,11 +22,11 @@ RUN set -xe && \
    mkdir -p /app/sonarr/bin && \
    curl --silent -o \
       /tmp/sonarr.tar.gz -L \
-      "https://download.sonarr.tv/v3/${SONARR_BRANCH}/${SONARR_RELEASE}/Sonarr.${SONARR_BRANCH}.${SONARR_RELEASE}.linux.tar.gz" && \
+      "https://download.sonarr.tv/v3/${BRANCH}/${VERSION}/Sonarr.${BRANCH}.${VERSION}.linux.tar.gz" && \
    tar xzf \
       /tmp/sonarr.tar.gz -C \
       /app/sonarr/bin --strip-components=1 && \
-   printf "UpdateMethod=docker\nBranch=${SONARR_BRANCH}\n" > /app/sonarr/package_info && \
+   printf "UpdateMethod=docker\nBranch=${BRANCH}\n" > /app/sonarr/package_info && \
    echo "**** cleanup ****" && \
    apk del --purge \
       build-dependencies && \
