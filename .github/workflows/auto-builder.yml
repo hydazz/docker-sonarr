@@ -54,7 +54,7 @@ jobs:
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
-          
+
       - name: Update README
         env:
           SONARR_RELEASE: ${{ steps.variables.outputs.SONARR_RELEASE }}
@@ -65,13 +65,16 @@ jobs:
         run: |
           curl -sSL https://raw.githubusercontent.com/hydazz/ci-templates/main/scripts/auto-builder.sh | bash
 
-      - name: Commit And Push Changes To Github
-        env:
-          TOKEN: ${{ secrets.TOKEN }}
+      - name: Commit Changes
         run: |
           git add -A
           git commit -m "Bot Updating Files" || echo "No Changes"
-          git push https://hydazz:${TOKEN}@github.com/hydazz/docker-sonarr.git main || echo "No Changes"
+
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.TOKEN }}
+        branch: main
 
       - name: Sync README With Docker Hub
         uses: peter-evans/dockerhub-description@v2
