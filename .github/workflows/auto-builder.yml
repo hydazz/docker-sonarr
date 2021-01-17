@@ -54,19 +54,7 @@ jobs:
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
-
-      - name: Build And Push The Docker Image
-        env:
-          SONARR_RELEASE: ${{ steps.variables.outputs.SONARR_RELEASE }}
-        run: |
-          docker build \
-            --platform=${PLATFORMS} \
-            --output "type=image,push=false" \
-            --build-arg VERSION=${SONARR_RELEASE} \
-            --build-arg BRANCH="${SONARR_BRANCH}" \
-            --tag ${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}:${DOCKERIMAGE_TAG} \
-            --file Dockerfile .
-
+          
       - name: Update README
         env:
           SONARR_RELEASE: ${{ steps.variables.outputs.SONARR_RELEASE }}
