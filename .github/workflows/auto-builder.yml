@@ -83,10 +83,12 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/hydazz/ci-templates/main/scripts/auto-builder.sh | bash
 
       - name: Commit And Push Changes To Github
+        env:
+          TOKEN: ${{ secrents.TOKEN }}
         run: |
           git add -A
-          git commit -m 'Bot Updating Files' || echo "No Changes"
-          git push || echo "No Changes"
+          git commit -m "Bot Updating Files" || echo "No Changes"
+          git push https://hydazz:${TOKEN}@github.com/hydazz/docker-'${DOCKERHUB_IMAGE}'.git '${BRANCH}' || echo "No Changes"' >>${output}
 
       - name: Sync README With Docker Hub
         uses: peter-evans/dockerhub-description@v2
