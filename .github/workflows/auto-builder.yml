@@ -88,7 +88,7 @@ jobs:
         run: |
           git add -A
           git commit -m "Bot Updating Files" || echo "No Changes"
-          git push https://hydazz:${TOKEN}@github.com/hydazz/docker-'${DOCKERHUB_IMAGE}'.git '${BRANCH}' || echo "No Changes"' >>${output}
+          git push https://hydazz:"${TOKEN}"@github.com/hydazz/docker-sonarr.git main || echo "No Changes"' >>${output}
 
       - name: Sync README With Docker Hub
         uses: peter-evans/dockerhub-description@v2
