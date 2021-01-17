@@ -70,11 +70,11 @@ jobs:
           git add -A
           git commit -m "Bot Updating Files" || echo "No Changes"
 
-    - name: Push changes
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.TOKEN }}
-        branch: main
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.TOKEN }}
+          branch: main
 
       - name: Sync README With Docker Hub
         uses: peter-evans/dockerhub-description@v2
