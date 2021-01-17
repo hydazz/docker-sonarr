@@ -8,7 +8,7 @@ Fork of [linuxserver/docker-sonarr](https://github.com/linuxserver/docker-sonarr
 
 ## Version Information
 
-![alpine](https://img.shields.io/badge/alpine-edge-0D597F?style=for-the-badge&logo=alpine-linux) ![s6overlay](https://img.shields.io/badge/s6_overlay-2.1.0.2-blue?style=for-the-badge) ![mono](https://img.shields.io/badge/mono-6.12.0.107-blue?style=for-the-badge) ![sonarr](https://img.shields.io/badge/sonarr-3.0.4.1061-blue?style=for-the-badge)
+![alpine](https://img.shields.io/badge/alpine-edge-0D597F?style=for-the-badge&logo=alpine-linux) ![s6overlay](https://img.shields.io/badge/s6_overlay-2.1.0.2-blue?style=for-the-badge) ![mono](https://img.shields.io/badge/mono-6.12.0.107-blue?style=for-the-badge) ![sonarr](https://img.shields.io/badge/sonarr-sonarr_release-blue?style=for-the-badge)
 
 See [package_versions.txt](package_versions.txt) for a full list of the packages and package versions used in this image
 

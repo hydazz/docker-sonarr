@@ -5,7 +5,7 @@ MONO_VERSION=$(grep <package_versions.txt -E "mono-runtime.*?-" | sed -n 1p | cu
 
 OLD_OVERLAY_VERSION=$(jq <version_info.json -r .overlay_version)
 OLD_MONO_VERSION=$(jq <version_info.json -r .mono_version)
-OLD_SONARR_RELEASE=$(jq <version_info.json -r .sonarr_version)
+OLD_SONARR_RELEASE=$(jq <version_info.json -r .sonarr_release)
 
 sed -i \
 	-e "s/${OLD_OVERLAY_VERSION}/${OVERLAY_VERSION}/g" \
