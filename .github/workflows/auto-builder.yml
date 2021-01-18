@@ -49,12 +49,17 @@ jobs:
             --tag vcxpz/sonarr:$(curl -sX GET "https://api.github.com/repos/hydazz/docker-sonarr/releases/latest" | jq -r .tag_name) \
             --file Dockerfile .
 
+      - name: Get New Package Versions From Image
+        run: |
+          docker run --rm --entrypoint /bin/sh -v "$PWD":/tmp ${DOCKERHUB_USER}/${DOCKERHUB_IMAGE}:${DOCKERIMAGE_TAG} -c "\
+            apk info -v | sort >/tmp/package_versions.txt"
+
       - name: Update README
         run: |
           export APP_VERSION=$(curl -sX GET "https://api.github.com/repos/hydazz/docker-sonarr/releases/latest" | jq -r .tag_name)
           chmod +x update_version_info.sh && ./update_version_info.sh
 
-      - name: Commit Changes
+      - name: Commit And Push Changes To Github
         run: |
           git add -A
           git commit -m "Bot Updating Files" || echo "No Changes"
