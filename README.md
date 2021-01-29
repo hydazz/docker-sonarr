@@ -6,12 +6,6 @@ Fork of [linuxserver/docker-sonarr](https://github.com/linuxserver/docker-sonarr
 
 [Sonarr](https://sonarr.tv/) is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
 
-## Version Information
-
-![alpine](https://img.shields.io/badge/alpine-edge-0D597F?style=for-the-badge&logo=alpine-linux) ![mono](https://img.shields.io/badge/mono-6.12.0.107-blue?style=for-the-badge) ![sonarr](https://img.shields.io/badge/sonarr-3.0.4.1091-blue?style=for-the-badge)
-
-See [package_versions.txt](package_versions.txt) for a full list of the packages and package versions used in this image
-
 ## Usage
 
     docker run -d \
