@@ -13,7 +13,6 @@ Fork of [linuxserver/docker-sonarr](https://github.com/linuxserver/docker-sonarr
       -e PUID=1000 \
       -e PGID=1000 \
       -e TZ=Australia/Melbourne \
-      -e UMASK_SET=022 `#optional` \
       -e DEBUG=true/false `#optional` \
       -p 8989:8989 \
       -v <path to appdata>:/config \
