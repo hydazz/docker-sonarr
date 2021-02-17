@@ -19,7 +19,7 @@ RUN \
 		xmlstarlet && \
 	echo "**** install sonarr ****" && \
 	if [ -z ${VERSION+x} ]; then \
-		VERSION=$(curl -sX GET "https://services.sonarr.tv/v1/download/phantom-develop?version=3" | jq -r .version); \
+		VERSION=$(curl -sL "https://services.sonarr.tv/v1/download/phantom-develop?version=3" | jq -r .version); \
 	fi && \
 	mkdir -p /app/sonarr/bin && \
 	curl --silent -o \
