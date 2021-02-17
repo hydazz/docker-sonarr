@@ -7,19 +7,20 @@ LABEL build_version="Sonarr version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
 
 # environment settings
-ARG BRANCH
+ARG BRANCH="phantom-develop"
 
 RUN \
 	echo "**** install build packages ****" && \
 	apk add --no-cache --virtual=build-dependencies \
-		curl && \
+		curl \
+		jq && \
 	echo "**** install runtime packages ****" && \
 	apk add --no-cache --upgrade \
 		libmediainfo \
 		xmlstarlet && \
 	echo "**** install sonarr ****" && \
 	if [ -z ${VERSION+x} ]; then \
-		VERSION=$(curl -sL "https://services.sonarr.tv/v1/download/phantom-develop?version=3" | jq -r .version); \
+		VERSION=$(curl -sL "https://services.sonarr.tv/v1/download/${BRANCH}?version=3" | jq -r '.version'); \
 	fi && \
 	mkdir -p /app/sonarr/bin && \
 	curl --silent -o \
