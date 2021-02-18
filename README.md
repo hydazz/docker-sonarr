@@ -27,7 +27,7 @@ docker run -d \
 
 ## New Environment Variables
 
-#### Debug
+### Debug
 
 | Name    | Description                                                                                              | Default Value |
 | ------- | -------------------------------------------------------------------------------------------------------- | ------------- |
@@ -41,8 +41,8 @@ To upgrade, all you have to do is pull the latest Docker image. We automatically
 
 ## Credits
 
-- [spritsail/sonarr](https://github.com/spritsail/sonarr) for the `HEALTHCHECK` command
-- [hotio](https://github.com/hotio) for the `redirect_cmd` function
+-   [spritsail/sonarr](https://github.com/spritsail/sonarr) for the `HEALTHCHECK` command
+-   [hotio](https://github.com/hotio) for the `redirect_cmd` function
 
 ## Fixing Appdata Permissions
 
