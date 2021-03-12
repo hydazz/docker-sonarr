@@ -15,7 +15,7 @@ RUN \
 		curl \
 		jq && \
 	echo "**** install runtime packages ****" && \
-	apk add --no-cache --upgrade \
+	apk add --no-cache \
 		libmediainfo \
 		xmlstarlet && \
 	echo "**** install sonarr ****" && \
