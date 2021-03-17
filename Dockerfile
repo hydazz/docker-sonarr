@@ -9,7 +9,7 @@ LABEL maintainer="hydaz"
 # environment settings
 ARG BRANCH="develop"
 
-RUN \
+RUN set -xe && \
 	echo "**** install build packages ****" && \
 	apk add --no-cache --virtual=build-dependencies \
 		curl \
@@ -24,7 +24,7 @@ RUN \
 			jq -r ".[] | select(.branch==\"$BRANCH\") | .version"); \
 	fi && \
 	mkdir -p /app/sonarr/bin && \
-	curl --silent -o \
+	curl -o \
 		/tmp/sonarr.tar.gz -L \
 		"https://download.sonarr.tv/v3/${BRANCH}/${VERSION}/Sonarr.${BRANCH}.${VERSION}.linux.tar.gz" && \
 	tar xzf \
