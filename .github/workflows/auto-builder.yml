@@ -44,7 +44,7 @@ jobs:
             --output "type=docker" \
             --build-arg BUILD_DATE="$(date +%Y-%m-%d)" \
             --build-arg VERSION=$(curl -sL "https://api.github.com/repos/hydazz/docker-sonarr/releases/latest" | jq -r '.tag_name') \
-            --build-arg BRANCH="phantom-develop" \
+            --build-arg BRANCH="develop" \
             --tag vcxpz/ci-build:ci-build \
             --file Dockerfile .
 
@@ -60,7 +60,7 @@ jobs:
             --output "type=image,push=true" \
             --build-arg BUILD_DATE="$(date +%Y-%m-%d)" \
             --build-arg VERSION=$(curl -sL "https://api.github.com/repos/hydazz/docker-sonarr/releases/latest" | jq -r '.tag_name') \
-            --build-arg BRANCH="phantom-develop" \
+            --build-arg BRANCH="develop" \
             --tag vcxpz/sonarr:$(curl -sL "https://api.github.com/repos/hydazz/docker-sonarr/releases/latest" | jq -r '.tag_name') \
             --tag vcxpz/sonarr:latest \
             --file Dockerfile .
