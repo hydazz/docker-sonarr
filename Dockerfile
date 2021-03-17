@@ -9,7 +9,7 @@ LABEL maintainer="hydaz"
 # environment settings
 ARG BRANCH="develop"
 
-RUN \
+RUN set -xe && \
 	echo "**** install build packages ****" && \
 	apk add --no-cache --virtual=build-dependencies \
 		curl \
