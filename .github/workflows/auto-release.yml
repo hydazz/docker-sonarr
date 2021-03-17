@@ -19,7 +19,7 @@ jobs:
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
-          VERSION=$(curl -sL "https://services.sonarr.tv/v1/download/phantom-develop?version=3" | jq -r '.version')
+          VERSION=$(curl -sL "http://services.sonarr.tv/v1/releases" | jq -r ".[] | select(.branch==\"develop\") | .version")
           OLD_VERSION=$(curl -sL "https://api.github.com/repos/hydazz/docker-sonarr/releases/latest" | jq -r '.tag_name')
           printf '{
                "tag_name": "'${VERSION}'",

@@ -7,7 +7,7 @@ LABEL build_version="Sonarr version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 LABEL maintainer="hydaz"
 
 # environment settings
-ARG BRANCH="phantom-develop"
+ARG BRANCH="develop"
 
 RUN \
 	echo "**** install build packages ****" && \
@@ -20,7 +20,8 @@ RUN \
 		xmlstarlet && \
 	echo "**** install sonarr ****" && \
 	if [ -z ${VERSION+x} ]; then \
-		VERSION=$(curl -sL "https://services.sonarr.tv/v1/download/${BRANCH}?version=3" | jq -r '.version'); \
+		VERSION=$(curl -sX GET http://services.sonarr.tv/v1/releases | \
+			jq -r ".[] | select(.branch==\"$BRANCH\") | .version"); \
 	fi && \
 	mkdir -p /app/sonarr/bin && \
 	curl --silent -o \
