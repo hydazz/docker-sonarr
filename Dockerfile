@@ -19,7 +19,7 @@ RUN set -xe && \
 		libmediainfo \
 		xmlstarlet && \
 	echo "**** install sonarr ****" && \
-	if [ -z ${VERSION+x} ]; then \
+	if [ -z ${VERSION} ]; then \
 		VERSION=$(curl -sX GET http://services.sonarr.tv/v1/releases | \
 			jq -r ".[] | select(.branch==\"$BRANCH\") | .version"); \
 	fi && \
