@@ -2,7 +2,7 @@
 
 [![docker hub](https://img.shields.io/badge/docker_hub-link-blue?style=for-the-badge&logo=docker)](https://hub.docker.com/r/vcxpz/sonarr) ![docker image size](https://img.shields.io/docker/image-size/vcxpz/sonarr?style=for-the-badge&logo=docker) [![auto build](https://img.shields.io/badge/docker_builds-automated-blue?style=for-the-badge&logo=docker?color=d1aa67)](https://github.com/hydazz/docker-sonarr/actions?query=workflow%3A"Auto+Builder+CI") [![codacy branch grade](https://img.shields.io/codacy/grade/2a0ea72f05114ed5add23ea922b7bcb3/main?style=for-the-badge&logo=codacy)](https://app.codacy.com/gh/hydazz/docker-sonarr)
 
-Fork of [linuxserver/docker-sonarr](https://github.com/linuxserver/docker-sonarr/)
+Fork of [linuxserver/docker-sonarr](https://github.com/linuxserver/docker-sonarr/) (Equivalent to develop-3.0.6.1262-ls174)
 
 [Sonarr](https://sonarr.tv/) is a PVR for Usenet and BitTorrent users. It can monitor multiple RSS feeds for new episodes of your favorite shows and will grab, sort and rename them. It can also be configured to automatically upgrade the quality of files already downloaded when a better quality format becomes available.
 
