@@ -15,7 +15,7 @@ RUN set -xe && \
 		curl \
 		jq && \
 	echo "**** install runtime packages ****" && \
-	apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/v3.13/main \
+	apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/v3.14/main \
 		libmediainfo \
 		xmlstarlet && \
 	echo "**** install sonarr ****" && \
